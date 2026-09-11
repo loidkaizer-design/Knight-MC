@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { addonTypes, addons, categories, minecraftVersions } from "@/lib/lightcraft-data";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/addons")({
+export const Route = createFileRoute("/addons/")({
   head: () => ({
     meta: [
       { title: "Browse Minecraft Add-ons — LightCraft" },

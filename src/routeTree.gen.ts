@@ -10,33 +10,85 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AddonsIndexRouteImport } from './routes/addons.index'
+import { Route as AddonsAddonRouteImport } from './routes/addons.$addon'
+import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
+import { Route as CategoriesCategoryRouteImport } from './routes/categories.$category'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AddonsIndexRoute = AddonsIndexRouteImport.update({
+  id: '/addons/',
+  path: '/addons/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AddonsAddonRoute = AddonsAddonRouteImport.update({
+  id: '/addons/$addon',
+  path: '/addons/$addon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesCategoryRoute = CategoriesCategoryRouteImport.update({
+  id: '/categories/$category',
+  path: '/categories/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/addons/$addon': typeof AddonsAddonRoute
+  '/categories/$category': typeof CategoriesCategoryRoute
+  '/addons/': typeof AddonsIndexRoute
+  '/categories/': typeof CategoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/addons/$addon': typeof AddonsAddonRoute
+  '/categories/$category': typeof CategoriesCategoryRoute
+  '/addons': typeof AddonsIndexRoute
+  '/categories': typeof CategoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/addons/$addon': typeof AddonsAddonRoute
+  '/categories/$category': typeof CategoriesCategoryRoute
+  '/addons/': typeof AddonsIndexRoute
+  '/categories/': typeof CategoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/addons/$addon'
+    | '/categories/$category'
+    | '/addons/'
+    | '/categories/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/addons/$addon' | '/categories/$category' | '/addons' | '/categories'
+  id:
+    | '__root__'
+    | '/'
+    | '/addons/$addon'
+    | '/categories/$category'
+    | '/addons/'
+    | '/categories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AddonsAddonRoute: typeof AddonsAddonRoute
+  CategoriesCategoryRoute: typeof CategoriesCategoryRoute
+  AddonsIndexRoute: typeof AddonsIndexRoute
+  CategoriesIndexRoute: typeof CategoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +100,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/addons/': {
+      id: '/addons/'
+      path: '/addons'
+      fullPath: '/addons/'
+      preLoaderRoute: typeof AddonsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/addons/$addon': {
+      id: '/addons/$addon'
+      path: '/addons/$addon'
+      fullPath: '/addons/$addon'
+      preLoaderRoute: typeof AddonsAddonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/': {
+      id: '/categories/'
+      path: '/categories'
+      fullPath: '/categories/'
+      preLoaderRoute: typeof CategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/$category': {
+      id: '/categories/$category'
+      path: '/categories/$category'
+      fullPath: '/categories/$category'
+      preLoaderRoute: typeof CategoriesCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AddonsAddonRoute: AddonsAddonRoute,
+  CategoriesCategoryRoute: CategoriesCategoryRoute,
+  AddonsIndexRoute: AddonsIndexRoute,
+  CategoriesIndexRoute: CategoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
