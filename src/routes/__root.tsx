@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { SiteHeader } from "@/components/site/SiteHeader";
+
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { BackToTop, FloatingCTA } from "@/components/site/ScrollWidgets";
 import appCss from "../styles.css?url";
