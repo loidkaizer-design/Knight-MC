@@ -10,14 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as AddonsIndexRouteImport } from './routes/addons.index'
 import { Route as AddonsAddonRouteImport } from './routes/addons.$addon'
 import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as CategoriesCategoryRouteImport } from './routes/categories.$category'
+import { Route as CreatorsIndexRouteImport } from './routes/creators.index'
+import { Route as CreatorsCreatorRouteImport } from './routes/creators.$creator'
+import { Route as RequestsIndexRouteImport } from './routes/requests.index'
+import { Route as RequestsRequestRouteImport } from './routes/requests.$request'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubmitRoute = SubmitRouteImport.update({
+  id: '/submit',
+  path: '/submit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AddonsIndexRoute = AddonsIndexRouteImport.update({
@@ -40,55 +56,121 @@ const CategoriesCategoryRoute = CategoriesCategoryRouteImport.update({
   path: '/categories/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreatorsIndexRoute = CreatorsIndexRouteImport.update({
+  id: '/creators/',
+  path: '/creators/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreatorsCreatorRoute = CreatorsCreatorRouteImport.update({
+  id: '/creators/$creator',
+  path: '/creators/$creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestsIndexRoute = RequestsIndexRouteImport.update({
+  id: '/requests/',
+  path: '/requests/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestsRequestRoute = RequestsRequestRouteImport.update({
+  id: '/requests/$request',
+  path: '/requests/$request',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/submit': typeof SubmitRoute
   '/addons/$addon': typeof AddonsAddonRoute
   '/categories/$category': typeof CategoriesCategoryRoute
+  '/creators/$creator': typeof CreatorsCreatorRoute
+  '/requests/$request': typeof RequestsRequestRoute
   '/addons/': typeof AddonsIndexRoute
   '/categories/': typeof CategoriesIndexRoute
+  '/creators/': typeof CreatorsIndexRoute
+  '/requests/': typeof RequestsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/submit': typeof SubmitRoute
   '/addons/$addon': typeof AddonsAddonRoute
   '/categories/$category': typeof CategoriesCategoryRoute
+  '/creators/$creator': typeof CreatorsCreatorRoute
+  '/requests/$request': typeof RequestsRequestRoute
   '/addons': typeof AddonsIndexRoute
   '/categories': typeof CategoriesIndexRoute
+  '/creators': typeof CreatorsIndexRoute
+  '/requests': typeof RequestsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/submit': typeof SubmitRoute
   '/addons/$addon': typeof AddonsAddonRoute
   '/categories/$category': typeof CategoriesCategoryRoute
+  '/creators/$creator': typeof CreatorsCreatorRoute
+  '/requests/$request': typeof RequestsRequestRoute
   '/addons/': typeof AddonsIndexRoute
   '/categories/': typeof CategoriesIndexRoute
+  '/creators/': typeof CreatorsIndexRoute
+  '/requests/': typeof RequestsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/submit'
     | '/addons/$addon'
     | '/categories/$category'
+    | '/creators/$creator'
+    | '/requests/$request'
     | '/addons/'
     | '/categories/'
+    | '/creators/'
+    | '/requests/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/addons/$addon' | '/categories/$category' | '/addons' | '/categories'
+    | '/'
+    | '/about'
+    | '/submit'
+    | '/addons/$addon'
+    | '/categories/$category'
+    | '/creators/$creator'
+    | '/requests/$request'
+    | '/addons'
+    | '/categories'
+    | '/creators'
+    | '/requests'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/submit'
     | '/addons/$addon'
     | '/categories/$category'
+    | '/creators/$creator'
+    | '/requests/$request'
     | '/addons/'
     | '/categories/'
+    | '/creators/'
+    | '/requests/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  SubmitRoute: typeof SubmitRoute
   AddonsAddonRoute: typeof AddonsAddonRoute
   CategoriesCategoryRoute: typeof CategoriesCategoryRoute
+  CreatorsCreatorRoute: typeof CreatorsCreatorRoute
+  RequestsRequestRoute: typeof RequestsRequestRoute
   AddonsIndexRoute: typeof AddonsIndexRoute
   CategoriesIndexRoute: typeof CategoriesIndexRoute
+  CreatorsIndexRoute: typeof CreatorsIndexRoute
+  RequestsIndexRoute: typeof RequestsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -98,6 +180,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/submit': {
+      id: '/submit'
+      path: '/submit'
+      fullPath: '/submit'
+      preLoaderRoute: typeof SubmitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/addons/': {
@@ -128,15 +224,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoriesCategoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/creators/': {
+      id: '/creators/'
+      path: '/creators'
+      fullPath: '/creators/'
+      preLoaderRoute: typeof CreatorsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creators/$creator': {
+      id: '/creators/$creator'
+      path: '/creators/$creator'
+      fullPath: '/creators/$creator'
+      preLoaderRoute: typeof CreatorsCreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/requests/': {
+      id: '/requests/'
+      path: '/requests'
+      fullPath: '/requests/'
+      preLoaderRoute: typeof RequestsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/requests/$request': {
+      id: '/requests/$request'
+      path: '/requests/$request'
+      fullPath: '/requests/$request'
+      preLoaderRoute: typeof RequestsRequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  SubmitRoute: SubmitRoute,
   AddonsAddonRoute: AddonsAddonRoute,
   CategoriesCategoryRoute: CategoriesCategoryRoute,
+  CreatorsCreatorRoute: CreatorsCreatorRoute,
+  RequestsRequestRoute: RequestsRequestRoute,
   AddonsIndexRoute: AddonsIndexRoute,
   CategoriesIndexRoute: CategoriesIndexRoute,
+  CreatorsIndexRoute: CreatorsIndexRoute,
+  RequestsIndexRoute: RequestsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
