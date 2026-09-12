@@ -1,24 +1,38 @@
 export type AddonStatus = "published" | "pending" | "rejected";
 
+import {
+  Blocks,
+  Car,
+  Compass,
+  Gamepad2,
+  Gem,
+  Hammer,
+  Leaf,
+  Palette,
+  Swords,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
+
 export type Category = {
   slug: string;
   name: string;
-  emoji: string;
+  icon: LucideIcon;
   blurb: string;
 };
 
 export const categories: Category[] = [
-  { slug: "weapons", name: "Weapons", emoji: "⚔️", blurb: "Swords, bows, guns and combat gear." },
-  { slug: "building", name: "Building", emoji: "🧱", blurb: "Blocks, furniture and build helpers." },
-  { slug: "mobs", name: "Mobs", emoji: "🐉", blurb: "New creatures, bosses and pets." },
-  { slug: "world", name: "World", emoji: "🌎", blurb: "Biomes, dimensions and generation." },
-  { slug: "textures", name: "Textures", emoji: "🎨", blurb: "Resource packs and shaders." },
-  { slug: "magic", name: "Magic", emoji: "🧙", blurb: "Spells, wands and enchantments." },
-  { slug: "vehicles", name: "Vehicles", emoji: "🚗", blurb: "Cars, planes, boats and trains." },
-  { slug: "survival", name: "Survival", emoji: "🌱", blurb: "Harder survival and progression." },
-  { slug: "gameplay", name: "Gameplay", emoji: "🎮", blurb: "Mechanics, minigames and quests." },
-  { slug: "utility", name: "Utility", emoji: "🔧", blurb: "Quality of life and tools." },
-  { slug: "other", name: "Other", emoji: "✨", blurb: "Everything else worth trying." },
+  { slug: "weapons", name: "Weapons", icon: Swords, blurb: "Swords, bows, guns and combat gear." },
+  { slug: "building", name: "Building", icon: Blocks, blurb: "Blocks, furniture and build helpers." },
+  { slug: "mobs", name: "Mobs", icon: Gem, blurb: "New creatures, bosses and pets." },
+  { slug: "world", name: "World", icon: Compass, blurb: "Biomes, dimensions and generation." },
+  { slug: "textures", name: "Textures", icon: Palette, blurb: "Resource packs and shaders." },
+  { slug: "magic", name: "Magic", icon: Gem, blurb: "Spells, wands and enchantments." },
+  { slug: "vehicles", name: "Vehicles", icon: Car, blurb: "Cars, planes, boats and trains." },
+  { slug: "survival", name: "Survival", icon: Leaf, blurb: "Harder survival and progression." },
+  { slug: "gameplay", name: "Gameplay", icon: Gamepad2, blurb: "Mechanics, minigames and quests." },
+  { slug: "utility", name: "Utility", icon: Wrench, blurb: "Quality of life and tools." },
+  { slug: "other", name: "Other", icon: Hammer, blurb: "Everything else worth trying." },
 ];
 
 export const minecraftVersions = ["1.21.x", "1.20.x", "1.19.x", "1.18.x"];
@@ -50,7 +64,10 @@ export type Addon = {
 
 const shot = (seed: string) => `https://picsum.photos/seed/${seed}/960/540`;
 
-export const addons: Addon[] = [
+export const addons: Addon[] = []; /* Add-ons are populated from the connected backend. */
+
+/* Removed mock add-on records. */
+/*
   {
     id: "a1",
     slug: "dragon-expansion",
@@ -297,6 +314,7 @@ export const addons: Addon[] = [
     screenshots: [shot("util1")],
   },
 ];
+*/
 
 export type Submission = {
   id: string;

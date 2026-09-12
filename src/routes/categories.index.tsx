@@ -39,7 +39,7 @@ function CategoriesPage() {
                 params={{ category: c.slug }}
                 className="rounded-2xl border bg-card-gradient p-6 transition-smooth hover:-translate-y-1 hover:border-primary/60 hover:shadow-glow"
               >
-                <span className="text-3xl">{c.emoji}</span>
+                <c.icon className="size-8 text-primary" aria-hidden="true" />
                 <h2 className="mt-3 font-display text-xl font-bold">{c.name}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">{c.blurb}</p>
                 <p className="mt-4 text-xs text-muted-foreground">

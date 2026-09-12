@@ -153,7 +153,7 @@ function Home() {
                 params={{ category: c.slug }}
                 className="rounded-2xl border bg-background/40 p-4 text-center transition-smooth hover:-translate-y-1 hover:border-primary/60 hover:shadow-glow"
               >
-                <span className="text-2xl">{c.emoji}</span>
+                <c.icon className="mx-auto size-6 text-primary" aria-hidden="true" />
                 <p className="mt-2 text-sm font-semibold">{c.name}</p>
               </Link>
             ))}

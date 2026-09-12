@@ -21,7 +21,7 @@ export function AddonCard({ addon }: { addon: Addon }) {
           className="size-full object-cover transition-smooth group-hover:scale-105"
         />
         <span className="absolute top-3 left-3 rounded-full glass-panel px-3 py-1 text-xs font-medium">
-          {category?.emoji} {category?.name}
+          {category?.icon && <category.icon className="mr-1 inline size-3.5" aria-hidden="true" />} {category?.name}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">

@@ -72,7 +72,7 @@ function AddonPage() {
 
   const facts = [
     { k: "Creator", v: addon.creator },
-    { k: "Category", v: `${category?.emoji ?? ""} ${category?.name ?? addon.category}` },
+    { k: "Category", v: category?.name ?? addon.category },
     { k: "Add-on type", v: addon.type },
     { k: "Minecraft versions", v: addon.versions.join(", ") },
     { k: "Add-on version", v: addon.addonVersion },
@@ -94,7 +94,7 @@ function AddonPage() {
           <div className="mt-6 grid items-start gap-8 lg:grid-cols-[1.4fr_1fr]">
             <div>
               <span className="inline-flex rounded-full glass-panel px-3 py-1 text-xs font-medium">
-                {category?.emoji} {category?.name}
+                {category?.icon && <category.icon className="mr-1 inline size-3.5" aria-hidden="true" />} {category?.name}
               </span>
               <h1 className="mt-4 font-display text-4xl font-black md:text-5xl">{addon.title}</h1>
               <p className="mt-3 max-w-2xl text-muted-foreground">{addon.tagline}</p>

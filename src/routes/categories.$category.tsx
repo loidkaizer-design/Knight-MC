@@ -43,7 +43,7 @@ function CategoryPage() {
   return (
     <>
       <PageHeader
-        eyebrow={`${category.emoji} Category`}
+        eyebrow="Category"
         title={category.name}
         highlight="Add-ons"
         description={category.blurb}
@@ -78,7 +78,7 @@ function CategoryPage() {
                   params={{ category: c.slug }}
                   className="rounded-full border border-border px-4 py-2 text-sm transition-smooth hover:bg-secondary"
                 >
-                  {c.emoji} {c.name}
+                  <c.icon className="mr-1 inline size-4 text-primary" aria-hidden="true" /> {c.name}
                 </Link>
               ))}
           </div>

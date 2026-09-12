@@ -57,7 +57,7 @@ function RequestPage() {
         <div className="flex flex-wrap items-center gap-3">
           <StatusPill status={request.status} />
           <span className="text-xs text-muted-foreground">
-            {category?.emoji} {category?.name} · {request.version}
+            {category?.icon && <category.icon className="mr-1 inline size-3.5" aria-hidden="true" />} {category?.name} · {request.version}
           </span>
         </div>
         <h1 className="mt-4 font-display text-3xl font-black md:text-4xl">{request.title}</h1>
