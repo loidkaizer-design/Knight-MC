@@ -10,13 +10,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/requests/")({
   head: () => ({
     meta: [
-      { title: "Add-on Requests — LightCraft" },
+      { title: "Add-on Requests — Knight MC" },
       {
         name: "description",
         content:
           "Request a Minecraft add-on nobody has built yet, upvote existing ideas and follow them from requested to completed.",
       },
-      { property: "og:title", content: "Add-on Requests — LightCraft" },
+      { property: "og:title", content: "Add-on Requests — Knight MC" },
       { property: "og:description", content: "Request Minecraft add-ons and upvote community ideas." },
     ],
   }),

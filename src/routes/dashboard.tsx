@@ -10,12 +10,12 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Your Dashboard — LightCraft" },
+      { title: "Your Dashboard — Knight MC" },
       {
         name: "description",
-        content: "Track your submitted add-ons, requests, favourites and download history on LightCraft.",
+        content: "Track your submitted add-ons, requests, favourites and download history on Knight MC.",
       },
-      { property: "og:title", content: "Your Dashboard — LightCraft" },
+      { property: "og:title", content: "Your Dashboard — Knight MC" },
       { property: "og:description", content: "Track your submissions, requests and favourites." },
     ],
   }),

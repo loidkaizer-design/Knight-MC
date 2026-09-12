@@ -6,13 +6,13 @@ import { addonsByCreator, creators, formatCount } from "@/lib/lightcraft-data";
 export const Route = createFileRoute("/creators/")({
   head: () => ({
     meta: [
-      { title: "Creators — LightCraft" },
+      { title: "Creators — Knight MC" },
       {
         name: "description",
-        content: "Meet the creators publishing Minecraft add-ons on LightCraft.",
+        content: "Meet the creators publishing Minecraft add-ons on Knight MC.",
       },
-      { property: "og:title", content: "Creators — LightCraft" },
-      { property: "og:description", content: "Meet the creators publishing add-ons on LightCraft." },
+      { property: "og:title", content: "Creators — Knight MC" },
+      { property: "og:description", content: "Meet the creators publishing add-ons on Knight MC." },
     ],
   }),
   component: CreatorsPage,
@@ -23,7 +23,7 @@ function CreatorsPage() {
     <>
       <PageHeader
         eyebrow="Community"
-        title="LightCraft"
+        title="Knight MC"
         highlight="Creators"
         description="The people building the packs in this library."
       />

@@ -14,15 +14,15 @@ export const Route = createFileRoute("/categories/$category")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Category not found — LightCraft" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Category not found — Knight MC" }, { name: "robots", content: "noindex" }],
       };
     }
     const { category } = loaderData;
     return {
       meta: [
-        { title: `${category.name} Add-ons — LightCraft` },
+        { title: `${category.name} Add-ons — Knight MC` },
         { name: "description", content: `${category.name} Minecraft add-ons: ${category.blurb}` },
-        { property: "og:title", content: `${category.name} Add-ons — LightCraft` },
+        { property: "og:title", content: `${category.name} Add-ons — Knight MC` },
         { property: "og:description", content: category.blurb },
       ],
     };

@@ -6,13 +6,13 @@ import { addonsByCategory, categories } from "@/lib/lightcraft-data";
 export const Route = createFileRoute("/categories/")({
   head: () => ({
     meta: [
-      { title: "Add-on Categories — LightCraft" },
+      { title: "Add-on Categories — Knight MC" },
       {
         name: "description",
         content:
           "Browse Minecraft add-ons by category: weapons, building, mobs, world, textures, magic, vehicles and more.",
       },
-      { property: "og:title", content: "Add-on Categories — LightCraft" },
+      { property: "og:title", content: "Add-on Categories — Knight MC" },
       { property: "og:description", content: "Browse Minecraft add-ons by category." },
     ],
   }),

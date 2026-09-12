@@ -15,15 +15,15 @@ export const Route = createFileRoute("/requests/$request")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Request not found — LightCraft" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Request not found — Knight MC" }, { name: "robots", content: "noindex" }],
       };
     }
     const { request } = loaderData;
     return {
       meta: [
-        { title: `${request.title} — LightCraft Request` },
+        { title: `${request.title} — Knight MC Request` },
         { name: "description", content: request.description },
-        { property: "og:title", content: `${request.title} — LightCraft Request` },
+        { property: "og:title", content: `${request.title} — Knight MC Request` },
         { property: "og:description", content: request.description },
       ],
     };

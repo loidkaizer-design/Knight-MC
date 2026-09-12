@@ -6,14 +6,14 @@ import { PageHeader } from "@/components/site/PageHeader";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About LightCraft — How the Add-on Library Works" },
+      { title: "About Knight MC — How the Add-on Library Works" },
       {
         name: "description",
         content:
-          "LightCraft is a community add-on library for Minecraft. Learn how submissions are reviewed, how downloads work and how requests get built.",
+          "Knight MC is a community add-on library for Minecraft. Learn how submissions are reviewed, how downloads work and how requests get built.",
       },
-      { property: "og:title", content: "About LightCraft" },
-      { property: "og:description", content: "How the LightCraft add-on library and review process works." },
+      { property: "og:title", content: "About Knight MC" },
+      { property: "og:description", content: "How the Knight MC add-on library and review process works." },
     ],
   }),
   component: AboutPage,
@@ -33,7 +33,7 @@ const pillars = [
   {
     icon: HardDriveDownload,
     title: "Fast, tracked downloads",
-    body: "Files live with our storage partner; LightCraft keeps the metadata and counts every download itself.",
+    body: "Files live with our storage partner; Knight MC keeps the metadata and counts every download itself.",
   },
   {
     icon: Users,
@@ -49,7 +49,7 @@ function AboutPage() {
         eyebrow="About"
         title="A cleaner home for"
         highlight="Minecraft add-ons"
-        description="LightCraft is a modern, reviewed library — not an old-fashioned forum full of dead links."
+        description="Knight MC is a modern, reviewed library — not an old-fashioned forum full of dead links."
       />
 
       <section className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
