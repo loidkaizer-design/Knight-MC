@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2, Download, Search, ShieldCheck, Upload } from 
 
 import heroIsland from "@/assets/hero-island.png";
 import { AddonCard } from "@/components/site/AddonCard";
-import { addons, categories, formatCount, requests } from "@/lib/lightcraft-data";
+import { addons, categories, categoryIcons, formatCount, requests } from "@/lib/lightcraft-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -146,17 +146,20 @@ function Home() {
             Popular <span className="text-violet-gradient">Categories</span>
           </h2>
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {categories.slice(0, 12).map((c) => (
+            {categories.slice(0, 12).map((c) => {
+              const Icon = categoryIcons[c.icon];
+              return (
               <Link
                 key={c.slug}
                 to="/categories/$category"
                 params={{ category: c.slug }}
                 className="rounded-2xl border bg-background/40 p-4 text-center transition-smooth hover:-translate-y-1 hover:border-primary/60 hover:shadow-glow"
               >
-                <c.icon className="mx-auto size-6 text-primary" aria-hidden="true" />
+                <Icon className="mx-auto size-6 text-primary" aria-hidden="true" />
                 <p className="mt-2 text-sm font-semibold">{c.name}</p>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

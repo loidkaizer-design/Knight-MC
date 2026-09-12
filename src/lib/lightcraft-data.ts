@@ -11,28 +11,52 @@ import {
   Palette,
   Swords,
   Wrench,
-  type LucideIcon,
 } from "lucide-react";
+
+export type CategoryIconName =
+  | "swords"
+  | "blocks"
+  | "gem"
+  | "compass"
+  | "palette"
+  | "car"
+  | "leaf"
+  | "gamepad"
+  | "wrench"
+  | "hammer";
 
 export type Category = {
   slug: string;
   name: string;
-  icon: LucideIcon;
+  icon: CategoryIconName;
   blurb: string;
 };
 
+export const categoryIcons = {
+  swords: Swords,
+  blocks: Blocks,
+  gem: Gem,
+  compass: Compass,
+  palette: Palette,
+  car: Car,
+  leaf: Leaf,
+  gamepad: Gamepad2,
+  wrench: Wrench,
+  hammer: Hammer,
+} as const;
+
 export const categories: Category[] = [
-  { slug: "weapons", name: "Weapons", icon: Swords, blurb: "Swords, bows, guns and combat gear." },
-  { slug: "building", name: "Building", icon: Blocks, blurb: "Blocks, furniture and build helpers." },
-  { slug: "mobs", name: "Mobs", icon: Gem, blurb: "New creatures, bosses and pets." },
-  { slug: "world", name: "World", icon: Compass, blurb: "Biomes, dimensions and generation." },
-  { slug: "textures", name: "Textures", icon: Palette, blurb: "Resource packs and shaders." },
-  { slug: "magic", name: "Magic", icon: Gem, blurb: "Spells, wands and enchantments." },
-  { slug: "vehicles", name: "Vehicles", icon: Car, blurb: "Cars, planes, boats and trains." },
-  { slug: "survival", name: "Survival", icon: Leaf, blurb: "Harder survival and progression." },
-  { slug: "gameplay", name: "Gameplay", icon: Gamepad2, blurb: "Mechanics, minigames and quests." },
-  { slug: "utility", name: "Utility", icon: Wrench, blurb: "Quality of life and tools." },
-  { slug: "other", name: "Other", icon: Hammer, blurb: "Everything else worth trying." },
+  { slug: "weapons", name: "Weapons", icon: "swords", blurb: "Swords, bows, guns and combat gear." },
+  { slug: "building", name: "Building", icon: "blocks", blurb: "Blocks, furniture and build helpers." },
+  { slug: "mobs", name: "Mobs", icon: "gem", blurb: "New creatures, bosses and pets." },
+  { slug: "world", name: "World", icon: "compass", blurb: "Biomes, dimensions and generation." },
+  { slug: "textures", name: "Textures", icon: "palette", blurb: "Resource packs and shaders." },
+  { slug: "magic", name: "Magic", icon: "gem", blurb: "Spells, wands and enchantments." },
+  { slug: "vehicles", name: "Vehicles", icon: "car", blurb: "Cars, planes, boats and trains." },
+  { slug: "survival", name: "Survival", icon: "leaf", blurb: "Harder survival and progression." },
+  { slug: "gameplay", name: "Gameplay", icon: "gamepad", blurb: "Mechanics, minigames and quests." },
+  { slug: "utility", name: "Utility", icon: "wrench", blurb: "Quality of life and tools." },
+  { slug: "other", name: "Other", icon: "hammer", blurb: "Everything else worth trying." },
 ];
 
 export const minecraftVersions = ["1.21.x", "1.20.x", "1.19.x", "1.18.x"];

@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 import { AddonCard } from "@/components/site/AddonCard";
 import { PageHeader } from "@/components/site/PageHeader";
-import { addonsByCategory, categories, categoryBySlug } from "@/lib/lightcraft-data";
+import { addonsByCategory, categories, categoryBySlug, categoryIcons } from "@/lib/lightcraft-data";
 
 export const Route = createFileRoute("/categories/$category")({
   loader: ({ params }) => {
@@ -71,16 +71,19 @@ function CategoryPage() {
           <div className="mt-4 flex flex-wrap gap-2">
             {categories
               .filter((c) => c.slug !== category.slug)
-              .map((c) => (
+              .map((c) => {
+                const Icon = categoryIcons[c.icon];
+                return (
                 <Link
                   key={c.slug}
                   to="/categories/$category"
                   params={{ category: c.slug }}
                   className="rounded-full border border-border px-4 py-2 text-sm transition-smooth hover:bg-secondary"
                 >
-                  <c.icon className="mr-1 inline size-4 text-primary" aria-hidden="true" /> {c.name}
+                  <Icon className="mr-1 inline size-4 text-primary" aria-hidden="true" /> {c.name}
                 </Link>
-              ))}
+                );
+              })}
           </div>
         </div>
       </section>
