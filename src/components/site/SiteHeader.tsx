@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, User as UserIcon, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import knightMcLogo from "@/assets/knight-mc-logo.png";
+import { AuthControls } from "@/components/auth/AuthControls";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -11,6 +12,7 @@ const navLinks = [
   { to: "/requests", label: "Requests" },
   { to: "/submit", label: "Submit" },
   { to: "/about", label: "About" },
+  { to: "/admin", label: "Admin" },
 ] as const;
 
 export function SiteHeader() {
@@ -63,12 +65,7 @@ export function SiteHeader() {
           >
             <Search className="size-4" />
           </Link>
-          <Link
-            to="/login"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-secondary"
-          >
-            <UserIcon className="size-4" /> Account
-          </Link>
+          <AuthControls />
           <Link
             to="/submit"
             className="hidden rounded-full bg-violet-gradient px-4 py-2 text-sm font-semibold text-primary-foreground shadow-glow transition-smooth hover:opacity-90 lg:inline-flex"
