@@ -83,13 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LightCraft — Minecraft Add-on Library" },
+      { title: "Knight MC — Minecraft Add-on Library" },
       {
         name: "description",
         content:
           "Discover, download, request and submit Minecraft add-ons. Every submission reviewed before it goes public.",
       },
-      { property: "og:title", content: "LightCraft — Minecraft Add-on Library" },
+      { property: "og:title", content: "Knight MC — Minecraft Add-on Library" },
       {
         property: "og:description",
         content: "Discover, download, request and submit Minecraft add-ons.",
@@ -108,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,

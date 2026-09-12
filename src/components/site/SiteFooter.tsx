@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4 lg:px-8">
         <div>
           <Link to="/" className="font-display text-2xl font-black">
-            Light<span className="text-violet-gradient">Craft</span>
+            Knight <span className="text-violet-gradient">MC</span>
           </Link>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
             Your Minecraft add-on library. Discover, download, request and share community
@@ -51,7 +51,7 @@ export function SiteFooter() {
             </li>
             <li>
               <Link to="/about" className="transition-smooth hover:text-foreground">
-                About LightCraft
+                About Knight MC
               </Link>
             </li>
           </ul>
@@ -69,12 +69,12 @@ export function SiteFooter() {
               </span>
             ))}
           </div>
-          <p className="mt-4 text-sm text-muted-foreground">hello@lightcraft.gg</p>
+          <p className="mt-4 text-sm text-muted-foreground">Knight MC</p>
         </div>
       </div>
 
       <div className="border-t px-4 py-6 text-center text-xs text-muted-foreground">
-        LightCraft is a community project and is not affiliated with Mojang or Microsoft.
+        Knight MC is a community project and is not affiliated with Mojang or Microsoft.
       </div>
     </footer>
   );

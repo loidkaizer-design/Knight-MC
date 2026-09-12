@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, Search, User as UserIcon, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import knightMcLogo from "@/assets/knight-mc-logo.webp.asset.json";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -31,13 +32,14 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 lg:flex lg:justify-between lg:px-8">
-        <Link to="/" className="flex min-w-0 items-center gap-2">
-          <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-violet-gradient shadow-glow font-display text-lg font-black">
-            L
-          </span>
-          <span className="truncate font-display text-xl font-black tracking-tight">
-            Light<span className="text-violet-gradient">Craft</span>
-          </span>
+        <Link to="/" className="flex min-w-0 items-center" aria-label="Knight MC home">
+          <img
+            src={knightMcLogo.url}
+            alt="Knight MC"
+            width={1920}
+            height={450}
+            className="h-10 w-auto max-w-[13rem] object-contain sm:h-11 sm:max-w-[16rem]"
+          />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
