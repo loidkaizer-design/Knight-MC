@@ -7,9 +7,9 @@ import { Field, fieldClass } from "@/components/site/FormBits";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Sign in — LightCraft" },
-      { name: "description", content: "Sign in to your LightCraft account to submit add-ons, save favourites and track requests." },
-      { property: "og:title", content: "Sign in — LightCraft" },
+      { title: "Sign in — Knight MC" },
+      { name: "description", content: "Sign in to your Knight MC account to submit add-ons, save favourites and track requests." },
+      { property: "og:title", content: "Sign in — Knight MC" },
       { property: "og:description", content: "Sign in to submit add-ons and track your requests." },
     ],
   }),
@@ -22,7 +22,7 @@ function LoginPage() {
   return (
     <section className="mx-auto flex max-w-md flex-col px-4 py-20">
       <h1 className="font-display text-3xl font-black">
-        Welcome back to <span className="text-violet-gradient">LightCraft</span>
+        Welcome back to <span className="text-violet-gradient">Knight MC</span>
       </h1>
       <p className="mt-2 text-sm text-muted-foreground">
         Sign in to submit add-ons, save favourites and vote on requests.

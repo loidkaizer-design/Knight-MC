@@ -27,15 +27,15 @@ export const Route = createFileRoute("/addons/$addon")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Add-on not found — LightCraft" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Add-on not found — Knight MC" }, { name: "robots", content: "noindex" }],
       };
     }
     const { addon } = loaderData;
     return {
       meta: [
-        { title: `${addon.title} — LightCraft Add-on` },
+        { title: `${addon.title} — Knight MC Add-on` },
         { name: "description", content: addon.tagline },
-        { property: "og:title", content: `${addon.title} — LightCraft` },
+        { property: "og:title", content: `${addon.title} — Knight MC` },
         { property: "og:description", content: addon.tagline },
         { property: "og:image", content: addon.screenshots[0] ?? "" },
         { name: "twitter:image", content: addon.screenshots[0] ?? "" },

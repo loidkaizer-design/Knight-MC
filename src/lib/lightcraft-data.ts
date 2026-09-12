@@ -520,7 +520,7 @@ export type User = {
 };
 
 export const users: User[] = [
-  { id: "u1", username: "Nathan", email: "nathan@lightcraft.gg", role: "owner", joined: "2024-01-04" },
+  { id: "u1", username: "Nathan", email: "nathan@knightmc.gg", role: "owner", joined: "2024-01-04" },
   { id: "u2", username: "EmberForge", email: "ember@forge.dev", role: "admin", joined: "2024-09-01" },
   { id: "u3", username: "AuroraPix", email: "aurora@pix.io", role: "moderator", joined: "2024-06-22" },
   { id: "u4", username: "RailRunner", email: "rail@runner.net", role: "user", joined: "2026-06-18" },

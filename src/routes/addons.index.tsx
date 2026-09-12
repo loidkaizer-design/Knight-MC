@@ -10,13 +10,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/addons/")({
   head: () => ({
     meta: [
-      { title: "Browse Minecraft Add-ons — LightCraft" },
+      { title: "Browse Minecraft Add-ons — Knight MC" },
       {
         name: "description",
         content:
-          "Search and filter the LightCraft library by Minecraft version, add-on type, category and popularity.",
+          "Search and filter the Knight MC library by Minecraft version, add-on type, category and popularity.",
       },
-      { property: "og:title", content: "Browse Minecraft Add-ons — LightCraft" },
+      { property: "og:title", content: "Browse Minecraft Add-ons — Knight MC" },
       {
         property: "og:description",
         content: "Search and filter reviewed Minecraft add-ons by version, type and category.",
@@ -68,7 +68,7 @@ function BrowsePage() {
         eyebrow="Library"
         title="Browse"
         highlight="Add-ons"
-        description="Every add-on here has been reviewed and tested by the LightCraft team."
+        description="Every add-on here has been reviewed and tested by the Knight MC team."
       />
 
       <section className="mx-auto max-w-7xl px-4 py-10 lg:px-8">

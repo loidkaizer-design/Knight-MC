@@ -11,13 +11,13 @@ import { addonTypes, categories, minecraftVersions } from "@/lib/lightcraft-data
 export const Route = createFileRoute("/submit")({
   head: () => ({
     meta: [
-      { title: "Submit an Add-on — LightCraft" },
+      { title: "Submit an Add-on — Knight MC" },
       {
         name: "description",
         content:
-          "Share your Minecraft add-on with the LightCraft community. Every submission is reviewed by an admin before publishing.",
+          "Share your Minecraft add-on with the Knight MC community. Every submission is reviewed by an admin before publishing.",
       },
-      { property: "og:title", content: "Submit an Add-on — LightCraft" },
+      { property: "og:title", content: "Submit an Add-on — Knight MC" },
       { property: "og:description", content: "Share your Minecraft add-on — reviewed before publishing." },
     ],
   }),

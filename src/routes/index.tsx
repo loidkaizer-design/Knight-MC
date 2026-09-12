@@ -8,13 +8,13 @@ import { addons, categories, formatCount, requests } from "@/lib/lightcraft-data
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LightCraft — Your Minecraft Add-on Library" },
+      { title: "Knight MC — Your Minecraft Add-on Library" },
       {
         name: "description",
         content:
           "Browse hundreds of reviewed Minecraft add-ons, request the ones nobody has built yet, and submit your own creations.",
       },
-      { property: "og:title", content: "LightCraft — Your Minecraft Add-on Library" },
+      { property: "og:title", content: "Knight MC — Your Minecraft Add-on Library" },
       {
         property: "og:description",
         content: "Browse reviewed Minecraft add-ons, request new ones and submit your own.",
@@ -63,7 +63,7 @@ function Home() {
               reviewed and published
             </span>
             <h1 className="mt-6 font-display text-5xl leading-[1.05] font-black md:text-6xl">
-              LightCraft
+              Knight MC
               <span className="mt-2 block text-3xl md:text-4xl">
                 Your <span className="text-violet-gradient">Minecraft Add-on</span> Library
               </span>
@@ -164,7 +164,7 @@ function Home() {
       {/* How it works */}
       <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
         <h2 className="font-display text-3xl font-black md:text-4xl">
-          How <span className="text-violet-gradient">LightCraft</span> works
+          How <span className="text-violet-gradient">Knight MC</span> works
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((s) => (

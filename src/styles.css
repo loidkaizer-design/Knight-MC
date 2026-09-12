@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * LightCraft design system — black / deep purple / violet, bright purple CTAs.
+ * Knight MC design system — black / deep purple / violet, bright purple CTAs.
  * All colors are oklch semantic tokens. Never hardcode colors in components.
  */
 

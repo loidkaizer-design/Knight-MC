@@ -13,15 +13,15 @@ export const Route = createFileRoute("/creators/$creator")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Creator not found — LightCraft" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Creator not found — Knight MC" }, { name: "robots", content: "noindex" }],
       };
     }
     const { creator } = loaderData;
     return {
       meta: [
-        { title: `${creator.name} — LightCraft Creator` },
+        { title: `${creator.name} — Knight MC Creator` },
         { name: "description", content: creator.bio },
-        { property: "og:title", content: `${creator.name} — LightCraft Creator` },
+        { property: "og:title", content: `${creator.name} — Knight MC Creator` },
         { property: "og:description", content: creator.bio },
       ],
     };

@@ -8,13 +8,13 @@ import { Field, fieldClass } from "@/components/site/FormBits";
 export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
-      { title: "Create an account — LightCraft" },
+      { title: "Create an account — Knight MC" },
       {
         name: "description",
-        content: "Create a LightCraft account to submit Minecraft add-ons, request new ones and save favourites.",
+        content: "Create a Knight MC account to submit Minecraft add-ons, request new ones and save favourites.",
       },
-      { property: "og:title", content: "Create an account — LightCraft" },
-      { property: "og:description", content: "Join LightCraft to submit and request Minecraft add-ons." },
+      { property: "og:title", content: "Create an account — Knight MC" },
+      { property: "og:description", content: "Join Knight MC to submit and request Minecraft add-ons." },
     ],
   }),
   component: RegisterPage,
@@ -32,7 +32,7 @@ function RegisterPage() {
   return (
     <section className="mx-auto flex max-w-md flex-col px-4 py-20">
       <h1 className="font-display text-3xl font-black">
-        Join <span className="text-violet-gradient">LightCraft</span>
+        Join <span className="text-violet-gradient">Knight MC</span>
       </h1>
       <p className="mt-2 text-sm text-muted-foreground">
         Free account — submit add-ons, request packs and keep a download history.
