@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { ClerkProvider } from "@clerk/tanstack-react-start";
 import { Toaster } from "@/components/ui/sonner";
 import { SiteHeader } from "@/components/site/SiteHeader";
 
@@ -16,7 +17,6 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { BackToTop, FloatingCTA } from "@/components/site/ScrollWidgets";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-
 
 function NotFoundComponent() {
   return (
@@ -124,7 +124,9 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <ClerkProvider publishableKey={import.meta.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+          {children}
+        </ClerkProvider>
         <Scripts />
       </body>
     </html>
@@ -150,4 +152,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

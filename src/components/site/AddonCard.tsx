@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { Download, Star } from "lucide-react";
 
-import { categoryBySlug, formatCount, type Addon } from "@/lib/lightcraft-data";
+import { categoryBySlug, categoryIcons, formatCount, type Addon } from "@/lib/lightcraft-data";
 
 export function AddonCard({ addon }: { addon: Addon }) {
   const category = categoryBySlug(addon.category);
+  const Icon = category ? categoryIcons[category.icon] : null;
   return (
     <Link
       to="/addons/$addon"
@@ -21,7 +22,7 @@ export function AddonCard({ addon }: { addon: Addon }) {
           className="size-full object-cover transition-smooth group-hover:scale-105"
         />
         <span className="absolute top-3 left-3 rounded-full glass-panel px-3 py-1 text-xs font-medium">
-          {category?.emoji} {category?.name}
+          {Icon && <Icon className="mr-1 inline size-3.5" aria-hidden="true" />} {category?.name}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">

@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 import { PageHeader } from "@/components/site/PageHeader";
-import { addonsByCategory, categories } from "@/lib/lightcraft-data";
+import { addonsByCategory, categories, categoryIcons } from "@/lib/lightcraft-data";
 
 export const Route = createFileRoute("/categories/")({
   head: () => ({
@@ -32,6 +32,7 @@ function CategoriesPage() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((c) => {
             const count = addonsByCategory(c.slug).length;
+            const Icon = categoryIcons[c.icon];
             return (
               <Link
                 key={c.slug}
@@ -39,7 +40,7 @@ function CategoriesPage() {
                 params={{ category: c.slug }}
                 className="rounded-2xl border bg-card-gradient p-6 transition-smooth hover:-translate-y-1 hover:border-primary/60 hover:shadow-glow"
               >
-                <span className="text-3xl">{c.emoji}</span>
+                <Icon className="size-8 text-primary" aria-hidden="true" />
                 <h2 className="mt-3 font-display text-xl font-bold">{c.name}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">{c.blurb}</p>
                 <p className="mt-4 text-xs text-muted-foreground">
