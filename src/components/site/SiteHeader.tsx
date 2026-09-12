@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, Search, User as UserIcon, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import knightMcLogo from "@/assets/knight-mc-logo.webp.asset.json";
+import knightMcLogo from "@/assets/knight-mc-logo.png";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -34,7 +34,7 @@ export function SiteHeader() {
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 lg:flex lg:justify-between lg:px-8">
         <Link to="/" className="flex min-w-0 items-center" aria-label="Knight MC home">
           <img
-            src={knightMcLogo.url}
+            src={knightMcLogo}
             alt="Knight MC"
             width={1920}
             height={450}
