@@ -21,6 +21,10 @@ const addonInput = z.object({
   readmeContent: z.string().max(50000).optional().default(""),
   addonFile: z.object({ name: z.string(), type: z.string(), data: z.string() }),
   thumbnail: z.object({ name: z.string(), type: z.string(), data: z.string() }).optional(),
+  screenshots: z
+    .array(z.object({ name: z.string(), type: z.string(), data: z.string() }))
+    .max(8)
+    .default([]),
 });
 
 function db() {
@@ -70,33 +74,66 @@ export const submitAddon = createServerFn({ method: "POST" })
       thumbnailPath = blob.pathname;
     }
 
-    const { error } = await db().from("addons").insert({
-      slug,
-      name: data.title,
-      description: data.description,
-      author_name: data.creator,
-      author_clerk_id: session.userId,
-      submitted_by: session.userId,
-      category: data.category,
-      version: data.addonVersion,
-      file_path: fileBlob.pathname,
-      image_path: thumbnailPath,
-      thumbnail_data: thumbnailPath,
-      addon_file_name: data.addonFile.name,
-      addon_type: data.type,
-      installation: data.installation,
-      hashtags: data.hashtags,
-      tags: data.tags,
-      credits: data.credits,
-      changelog: data.changelog,
-      compatibility: data.compatibility,
-      readme_content: data.readmeContent,
-      status: "pending",
-      downloads: 0,
-      viewers: 0,
-      stats_initialized: true,
-    });
-    if (error) throw new Error("Could not save your submission.");
+    for (const screenshot of data.screenshots) {
+      const image = decodeDataUrl(screenshot.data);
+      if (!image.type.startsWith("image/") || image.bytes.byteLength > 8 * 1024 * 1024) {
+        throw new Error("Screenshots must be images under 8 MB each.");
+      }
+    }
+
+    const { data: insertedAddon, error } = await db()
+      .from("addons")
+      .insert({
+        slug,
+        name: data.title,
+        description: data.description,
+        author_name: data.creator,
+        author_clerk_id: session.userId,
+        submitted_by: session.userId,
+        category: data.category,
+        version: data.addonVersion,
+        file_path: fileBlob.pathname,
+        image_path: thumbnailPath,
+        thumbnail_data: thumbnailPath,
+        addon_file_name: data.addonFile.name,
+        addon_type: data.type,
+        installation: data.installation,
+        hashtags: data.hashtags,
+        tags: data.tags,
+        credits: data.credits,
+        changelog: data.changelog,
+        compatibility: data.compatibility,
+        readme_content: data.readmeContent,
+        status: "pending",
+        downloads: 0,
+        viewers: 0,
+        stats_initialized: true,
+      })
+      .select("id")
+      .single();
+    if (error || !insertedAddon) throw new Error("Could not save your submission.");
+
+    if (data.screenshots.length > 0) {
+      const screenshotRows = [];
+      for (const [index, screenshot] of data.screenshots.entries()) {
+        const image = decodeDataUrl(screenshot.data);
+        const blob = await put(
+          `addons/${session.userId}/${slug}/screenshots/${index + 1}-${screenshot.name}`,
+          image.bytes,
+          { access: "private", contentType: image.type },
+        );
+        screenshotRows.push({
+          addon_id: insertedAddon.id,
+          storage_path: blob.pathname,
+          mime_type: image.type,
+          sort_order: index,
+        });
+      }
+      const { error: screenshotError } = await db()
+        .from("addon_screenshots")
+        .insert(screenshotRows);
+      if (screenshotError) throw new Error("Could not save addon screenshots.");
+    }
     return { slug };
   });
 

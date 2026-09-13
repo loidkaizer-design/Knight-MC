@@ -80,6 +80,7 @@ function SubmitPage() {
   });
   const [addonFile, setAddonFile] = useState<UploadValue | null>(null);
   const [thumbnail, setThumbnail] = useState<UploadValue | undefined>();
+  const [screenshots, setScreenshots] = useState<UploadValue[]>([]);
   const [readme, setReadme] = useState(
     "# My add-on\n\nDescribe what makes your add-on special.\n\n## Features\n- Feature one\n- Feature two",
   );
@@ -114,6 +115,15 @@ function SubmitPage() {
     setThumbnail(value);
     insert(`\n![${file.name}](${value.data})\n`);
   };
+  const onScreenshots = async (files: FileList | null) => {
+    if (!files) return;
+    const incoming = Array.from(files);
+    if (screenshots.length + incoming.length > 8) return toast.error("Add up to 8 screenshots.");
+    if (incoming.some((file) => !imageTypes.includes(file.type) || file.size > 8 * 1024 * 1024))
+      return toast.error("Use PNG, JPG, WEBP, or GIF screenshots under 8 MB each.");
+    const values = await Promise.all(incoming.map(readFile));
+    setScreenshots((current) => [...current, ...values]);
+  };
   const tags = (value: string) =>
     value
       .split(",")
@@ -136,6 +146,7 @@ function SubmitPage() {
           readmeContent: readme,
           addonFile,
           thumbnail,
+          screenshots,
         },
       });
       setSubmitted(true);
@@ -231,6 +242,21 @@ function SubmitPage() {
                 alt="Thumbnail preview"
                 className="mt-6 max-h-80 w-full rounded-2xl object-cover"
               />
+            )}
+            {screenshots.length > 0 && (
+              <div className="mt-6">
+                <h3 className="font-display text-lg font-bold">Screenshots</h3>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {screenshots.map((screenshot, index) => (
+                    <img
+                      key={`${screenshot.name}-${index}`}
+                      src={screenshot.data}
+                      alt={`Screenshot ${index + 1}`}
+                      className="aspect-video w-full rounded-xl border object-cover"
+                    />
+                  ))}
+                </div>
+              </div>
             )}
             {mode === "advanced" && (
               <pre className="mt-6 whitespace-pre-wrap rounded-2xl bg-secondary p-5 text-sm">
@@ -456,6 +482,42 @@ function SubmitPage() {
                   onChange={(e) => void onImage(e.target.files?.[0])}
                   className={fieldClass}
                 />
+              </Field>
+              <Field label="Screenshots (up to 8)">
+                <input
+                  type="file"
+                  multiple
+                  accept={imageTypes.join(",")}
+                  onChange={(e) => void onScreenshots(e.target.files)}
+                  className={fieldClass}
+                />
+                <p className="mt-2 text-xs text-muted-foreground">
+                  PNG, JPG, WEBP, or GIF · max 8 MB each
+                </p>
+                {screenshots.length > 0 && (
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    {screenshots.map((screenshot, index) => (
+                      <div key={`${screenshot.name}-${index}`} className="group relative">
+                        <img
+                          src={screenshot.data}
+                          alt={screenshot.name}
+                          className="aspect-video w-full rounded-lg border object-cover"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setScreenshots((items) =>
+                              items.filter((_, itemIndex) => itemIndex !== index),
+                            )
+                          }
+                          className="absolute right-1 top-1 rounded-full bg-background/90 px-2 py-1 text-xs opacity-0 transition group-hover:opacity-100"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </Field>
               <Field label={`Add-on file (${allowedExtensions.join(", ")} · max ${maxSizeMb} MB)`}>
                 <input
