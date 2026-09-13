@@ -4,10 +4,44 @@ import { useMemo, useState } from "react";
 
 import { AddonCard } from "@/components/site/AddonCard";
 import { PageHeader } from "@/components/site/PageHeader";
-import { addonTypes, addons, categories, minecraftVersions } from "@/lib/lightcraft-data";
+import { addonTypes, categories, minecraftVersions, type Addon } from "@/lib/lightcraft-data";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/addons/")({
+  loader: async () => {
+    const { data } = await supabase
+      .from("addons")
+      .select(
+        "id,slug,name,description,author_name,category,addon_type,version,downloads,created_at,updated_at,image_path,status",
+      )
+      .eq("status", "approved")
+      .order("created_at", { ascending: false });
+    const liveAddons: Addon[] = (data ?? []).map((addon) => ({
+      id: addon.id,
+      slug: addon.slug,
+      title: addon.name,
+      tagline: addon.description.slice(0, 140),
+      description: addon.description,
+      creator: addon.author_name,
+      creatorSlug: addon.author_name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      category: addon.category,
+      type: addon.addon_type ?? "Add-on Bundle",
+      versions: [addon.version],
+      addonVersion: addon.version,
+      fileSize: "Download",
+      updated: addon.updated_at,
+      created: addon.created_at,
+      downloads: addon.downloads,
+      rating: 0,
+      featured: false,
+      status: "published",
+      requirements: [],
+      installation: [],
+      screenshots: addon.image_path ? [addon.image_path] : [],
+    }));
+    return { liveAddons };
+  },
   head: () => ({
     meta: [
       { title: "Browse Minecraft Add-ons — Knight MC" },
@@ -37,6 +71,7 @@ const selectClass =
   "w-full rounded-xl border border-input bg-card px-3 py-2.5 text-sm text-foreground outline-none transition-smooth focus:border-primary";
 
 function BrowsePage() {
+  const { liveAddons } = Route.useLoaderData();
   const [query, setQuery] = useState("");
   const [version, setVersion] = useState("all");
   const [type, setType] = useState("all");
@@ -46,7 +81,7 @@ function BrowsePage() {
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const list = addons.filter((a) => {
+    const list = liveAddons.filter((a) => {
       if (a.status !== "published") return false;
       if (q && !`${a.title} ${a.tagline} ${a.creator}`.toLowerCase().includes(q)) return false;
       if (version !== "all" && !a.versions.includes(version)) return false;
@@ -60,7 +95,7 @@ function BrowsePage() {
       if (sort === "created") return b.created.localeCompare(a.created);
       return b.updated.localeCompare(a.updated);
     });
-  }, [query, version, type, category, sort]);
+  }, [liveAddons, query, version, type, category, sort]);
 
   return (
     <>
