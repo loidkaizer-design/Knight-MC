@@ -100,6 +100,92 @@ export const submitAddon = createServerFn({ method: "POST" })
     return { slug };
   });
 
+const adminEmails = new Set([
+  "loidkaizer@gmail.com",
+  "niethanbabor@gmail.com",
+  "nathanbabor5@gmail.com",
+]);
+
+async function requireAdmin() {
+  const session = await auth();
+  if (!session.userId) throw new Error("Sign in required.");
+  const { currentUser } = await import("@clerk/tanstack-react-start/server");
+  const user = await currentUser();
+  const email = user?.emailAddresses
+    .find((item) => item.id === user.primaryEmailAddressId)
+    ?.emailAddress.toLowerCase();
+  if (!email || !adminEmails.has(email)) throw new Error("Administrator access required.");
+  return session.userId;
+}
+
+export const getPendingAddons = createServerFn({ method: "GET" }).handler(async () => {
+  await requireAdmin();
+  const { data, error } = await db()
+    .from("addons")
+    .select(
+      "id,slug,name,description,author_name,category,version,status,created_at,downloads,viewers",
+    )
+    .eq("status", "pending")
+    .order("created_at", { ascending: true });
+  if (error) throw new Error("Could not load moderation queue.");
+  return data ?? [];
+});
+
+export const moderateAddon = createServerFn({ method: "POST" })
+  .validator(
+    z.object({
+      id: z.string().uuid(),
+      status: z.enum(["approved", "rejected"]),
+      reason: z.string().max(500).optional(),
+    }),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { error } = await db()
+      .from("addons")
+      .update({
+        status: data.status,
+        moderation_notes: data.reason ?? null,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", data.id);
+    if (error) throw new Error("Could not update addon moderation status.");
+    return { ok: true };
+  });
+
+export const submitAddonRating = createServerFn({ method: "POST" })
+  .validator(
+    z.object({
+      addonId: z.string().uuid(),
+      stars: z.number().int().min(1).max(5),
+      comment: z.string().trim().max(2000).optional(),
+    }),
+  )
+  .handler(async ({ data }) => {
+    const session = await auth();
+    if (!session.userId) throw new Error("Sign in to rate or comment.");
+    const { data: download } = await db()
+      .from("addon_downloads")
+      .select("id")
+      .eq("addon_id", data.addonId)
+      .eq("user_id", session.userId)
+      .maybeSingle();
+    if (!download) throw new Error("Download the addon before sharing your experience.");
+    const { error } = await db()
+      .from("addon_ratings")
+      .upsert(
+        {
+          addon_id: data.addonId,
+          user_id: session.userId,
+          stars: data.stars,
+          comment: data.comment ?? null,
+        },
+        { onConflict: "addon_id,user_id" },
+      );
+    if (error) throw new Error("Could not save your rating.");
+    return { ok: true };
+  });
+
 export const recordAddonDownload = createServerFn({ method: "POST" })
   .validator(z.object({ addonId: z.string().uuid() }))
   .handler(async ({ data }) => {
@@ -116,8 +202,8 @@ export const recordAddonDownload = createServerFn({ method: "POST" })
       .from("addon_downloads")
       .insert({
         addon_id: addon.id,
-        clerk_user_id: session.userId ?? null,
-        download_token: crypto.randomUUID(),
+        user_id: session.userId ?? null,
+        visitor_key: crypto.randomUUID(),
       })
       .select("id")
       .single();
