@@ -85,33 +85,31 @@ export const submitAddon = createServerFn({ method: "POST" })
       .from("addons")
       .insert({
         slug,
-        name: data.title,
+        title: data.title,
         description: data.description,
         author_name: data.creator,
-        author_clerk_id: session.userId,
-        submitted_by: session.userId,
+        submitter_id: session.userId,
         category: data.category,
-        version: data.addonVersion,
-        file_path: fileBlob.pathname,
-        image_path: thumbnailPath,
-        thumbnail_data: thumbnailPath,
-        addon_file_name: data.addonFile.name,
         addon_type: data.type,
-        installation: data.installation,
-        hashtags: data.hashtags,
-        tags: data.tags,
-        credits: data.credits,
-        changelog: data.changelog,
-        compatibility: data.compatibility,
-        readme_content: data.readmeContent,
+        addon_version: data.addonVersion,
+        versions: [data.version],
+        installation: data.installation
+          .split("\\n")
+          .map((step) => step.trim())
+          .filter(Boolean),
+        file_url: fileBlob.pathname,
+        cover_url: thumbnailPath,
+        tagline: data.description.slice(0, 140),
         status: "pending",
         downloads: 0,
         viewers: 0,
-        stats_initialized: true,
       })
       .select("id")
       .single();
-    if (error || !insertedAddon) throw new Error("Could not save your submission.");
+    if (error || !insertedAddon) {
+      console.error("[v0] Addon insert failed", error);
+      throw new Error(error?.message ?? "Could not save your submission.");
+    }
 
     if (data.screenshots.length > 0) {
       const screenshotRows = [];
@@ -124,15 +122,17 @@ export const submitAddon = createServerFn({ method: "POST" })
         );
         screenshotRows.push({
           addon_id: insertedAddon.id,
-          storage_path: blob.pathname,
-          mime_type: image.type,
+          image_url: blob.pathname,
           sort_order: index,
         });
       }
       const { error: screenshotError } = await db()
         .from("addon_screenshots")
         .insert(screenshotRows);
-      if (screenshotError) throw new Error("Could not save addon screenshots.");
+      if (screenshotError) {
+        console.error("[v0] Screenshot insert failed", screenshotError);
+        throw new Error(screenshotError.message);
+      }
     }
     return { slug };
   });
